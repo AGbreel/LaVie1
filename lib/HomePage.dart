@@ -9,6 +9,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  bool passwordVisible=false;
+  @override
+  void initState(){
+    super.initState();
+    passwordVisible=true;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,6 +94,7 @@ class _HomePageState extends State<HomePage> {
                     height: 35,
                     width: 250,
                     child: TextField(
+                      cursorColor: Color.fromARGB(255, 0, 255, 0),
                       decoration: InputDecoration(
                           //label: Text("Email"),
                           //hintText: "enter your email",
@@ -107,20 +116,36 @@ class _HomePageState extends State<HomePage> {
                       textAlign: TextAlign.left,
                     ),
                   ),
-                  const SizedBox(
+                   SizedBox(
                     height: 35,
                     width: 250,
                     child: TextField(
+                      cursorColor: const Color.fromARGB(255, 0, 255, 0),
+                      obscureText: passwordVisible,
+                      keyboardType: TextInputType.visiblePassword,
+                      textInputAction: TextInputAction.done,
                       decoration: InputDecoration(
-                          //label: Text("Password"),
-                          //hintText: "enter your password",
-                          //prefixIcon: Icon(Icons.password),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
+                        //label: Text("Password"),
+                        //hintText: "enter your password",
+                        //prefixIcon: Icon(Icons.password),
+                        suffixIcon: IconButton(
+                          icon: Icon(passwordVisible ? Icons.visibility : Icons.visibility_off),
+                          onPressed: () {
+                            setState(
+                                  () {
+                                passwordVisible = !passwordVisible;
+                              },
+                            );
+                          },
+                        ),
+                        alignLabelWithHint: false,
+                        filled: true,
+                        enabledBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
                           ),
-                          focusedBorder: OutlineInputBorder(
+                          focusedBorder: const OutlineInputBorder(
                               borderSide: BorderSide(color: Color.fromARGB(255, 0, 255, 0)),
-                          )
+                          ),
                       ),
                     ),
                   ),
